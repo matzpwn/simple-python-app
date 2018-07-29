@@ -1,4 +1,9 @@
-# simple-python-app
+# Simple-python-app
 Simple python app for testing
 
-It runs on port 5002, fyi
+## Specs
+
+- Python 3.7
+- uWSGI
+- Flask
+- Runs on port 5002
