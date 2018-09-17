@@ -12,6 +12,6 @@ Simple python app for testing
 
 pip install -r requirements.txt
 
-## Environment
+## Build docker image
 
-Docker image : https://github.com/muffat/docker-images/tree/master/simple-python-app
+`docker build -t simple-python-app .`
