@@ -1,25 +1,19 @@
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: k8s_python_sample_code
-  namespace: k8s_python_sample_code
+  name: simple-python
 spec:
-  replicas: 1
+  selector:
+    matchLabels:
+      app: simple-python
+  replicas: 2
   template:
-  metadata:
-    labels:
-    k8s-app: simple-python-app
-  spec:
-    containers:
-    - name: simple-python-app
-      image: cerpin/simple-python-app:latest
-      imagePullPolicy: "IfNotPresent"
-      ports:
-      - containerPort: 5002
-      volumeMounts:
-        - mountPath: /app-data
-          name: simple-python-app
-     volumes: 
-         - name: <name of application>
-           persistentVolumeClaim:
-             claimName: appclaim1
+    metadata:
+      labels:
+        app: simple-python
+    spec:
+      containers:
+      - name: simple-python
+        image: cerpin/simple-python-app:latest
+        ports:
+        - containerPort: 5002
