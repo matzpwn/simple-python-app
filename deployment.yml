@@ -1,0 +1,25 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: k8s_python_sample_code
+  namespace: k8s_python_sample_code
+spec:
+  replicas: 1
+  template:
+  metadata:
+    labels:
+    k8s-app: simple-pythona-app
+  spec:
+    containers:
+    - name: simple-pythona-app
+      image: cerpin/simple-pythona-app:latest
+      imagePullPolicy: "IfNotPresent"
+      ports:
+      - containerPort: 5002
+      volumeMounts:
+        - mountPath: /app-data
+          name: simple-pythona-app
+     volumes: 
+         - name: <name of application>
+           persistentVolumeClaim:
+             claimName: appclaim1
