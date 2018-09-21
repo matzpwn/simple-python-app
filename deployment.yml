@@ -8,17 +8,17 @@ spec:
   template:
   metadata:
     labels:
-    k8s-app: simple-pythona-app
+    k8s-app: simple-python-app
   spec:
     containers:
-    - name: simple-pythona-app
-      image: cerpin/simple-pythona-app:latest
+    - name: simple-python-app
+      image: cerpin/simple-python-app:latest
       imagePullPolicy: "IfNotPresent"
       ports:
       - containerPort: 5002
       volumeMounts:
         - mountPath: /app-data
-          name: simple-pythona-app
+          name: simple-python-app
      volumes: 
          - name: <name of application>
            persistentVolumeClaim:
