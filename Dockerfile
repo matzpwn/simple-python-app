@@ -13,18 +13,18 @@ RUN set -ex \
     && ./configure \
     && make \
     && make altinstall \
-    && useradd simple -md /srv/simple \
-    && su - simple -c 'virtualenv --python=python3.7 ~/venv' \
-    && su - simple -c 'git clone https://github.com/muffat/simple-python-app.git www' \
-    && su - simple -c 'source ~/venv/bin/activate' \
-    && su - simple -c '/srv/simple/venv/bin/pip install -r www/requirements.txt' \
-    && su - simple -c 'mkdir logs' \
-    && su - simple -c 'touch logs/uwsgi.log' \
-    && su - simple -c 'echo "source ~/venv/bin/activate" >> ~/.profile' \
+    && useradd app -md /srv/app \
+    && su - app -c 'virtualenv --python=python3.7 ~/venv' \
+    && su - app -c 'git clone https://github.com/muffat/simple-python-app.git www' \
+    && su - app -c 'source ~/venv/bin/activate' \
+    && su - app -c '/srv/app/venv/bin/pip install -r www/requirements.txt' \
+    && su - app -c 'mkdir logs' \
+    && su - app -c 'touch logs/uwsgi.log' \
+    && su - app -c 'echo "source ~/venv/bin/activate" >> ~/.profile' \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 EXPOSE 5002
 
-ENTRYPOINT ["/srv/simple/venv/bin/uwsgi"]
+ENTRYPOINT ["/srv/app/venv/bin/uwsgi"]
 
-CMD ["--ini", "/srv/simple/www/uwsgi.ini"]
+CMD ["--ini", "/srv/app/www/uwsgi.ini"]
