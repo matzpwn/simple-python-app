@@ -1,4 +1,4 @@
-FROM ubuntu:16.04
+FROM python:3.7.4-slim-stretch
 
 RUN set -ex \
     && apt-get update -y \
@@ -7,12 +7,6 @@ RUN set -ex \
        python-virtualenv \
        openssl libffi-dev -y \
     && apt-get clean \
-    && wget https://www.python.org/ftp/python/3.7.0/Python-3.7.0.tgz -P /tmp \
-    && tar xzvf /tmp/Python-3.7.0.tgz -C /tmp \
-    && cd /tmp/Python-3.7.0 \
-    && ./configure \
-    && make \
-    && make altinstall \
     && useradd app -md /srv/app \
     && su - app -c 'virtualenv --python=python3.7 ~/venv' \
     && su - app -c 'git clone https://github.com/muffat/simple-python-app.git www' \
